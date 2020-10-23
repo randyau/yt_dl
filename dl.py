@@ -1,6 +1,8 @@
 # IPython log file
-import os
 import pickle
+import os
+import random
+import time
 from pytube import Playlist
 from pytube import YouTube
 
@@ -9,8 +11,11 @@ OUTDIR = "output/"
 
 def prep_queue_record(queue):
     try:
-        queue_record = pickle.load(open(RECORD_FILE,'r'))
-    except:
+        queue_record = pickle.load(open(RECORD_FILE,'rb'))
+        print("record loaded")
+    except Exception as e:
+        print(e)
+        print("creating new record")
         queue_record = {}
 
     for entry in queue:
@@ -23,12 +28,14 @@ def prep_queue_record(queue):
 def download_all(queue_record):
     for url,downloaded in queue_record.items():
         if downloaded:
+            print("{}, cached".format(url))
             continue
         else:
             try:
                 print("attempting: ", url)
                 YouTube(url).streams.get_highest_resolution().download(output_path=OUTDIR)
                 queue_record[url]=True #downloaded
+                time.sleep(random.uniform(1,3))
                 print("completed: ", url)
             except:
                 print(url," failed")
