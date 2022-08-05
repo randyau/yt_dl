@@ -25,14 +25,14 @@ def prep_queue_record(queue):
             queue_record[entry]=False#false because it's not downloaded
     return queue_record
 
-def get_stream(stream_type='video'):
+def get_stream(url,stream_type='video'):
     """
     stream_type can be 'video' or 'audio'
     Returns stream object to call .download() on
     """
-    if type == 'video':
+    if stream_type == 'video':
         return YouTube(url).streams.get_highest_resolution()
-    elif type == 'audio':
+    elif stream_type == 'audio':
         return YouTube(url).streams.get_audio_only()
     else:
         return None
@@ -45,8 +45,7 @@ def download_all(queue_record):
         else:
             try:
                 print("attempting: ", url)
-                YouTube(url).streams.get_audio_only()
-                s_obj = get_stream(stream_type='video')
+                s_obj = get_stream(url,stream_type='video')
                 s_obj.download(output_path=OUTDIR)
                 queue_record[url]=True #downloaded
                 time.sleep(random.uniform(1,3))
