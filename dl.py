@@ -37,7 +37,8 @@ def get_stream(url,stream_type='video'):
     else:
         return None
 
-def download_all(queue_record):
+def download_all(queue_record, dl_type):
+    "dl_type is passed straight to the stream getter, can be 'audio' or 'video'"
     for url,downloaded in queue_record.items():
         if downloaded:
             print("{}, cached".format(url))
@@ -45,7 +46,7 @@ def download_all(queue_record):
         else:
             try:
                 print("attempting: ", url)
-                s_obj = get_stream(url,stream_type='video')
+                s_obj = get_stream(url,stream_type=dl_type)
                 s_obj.download(output_path=OUTDIR)
                 queue_record[url]=True #downloaded
                 time.sleep(random.uniform(1,3))
@@ -61,6 +62,7 @@ if __name__=="__main__":
         os.makedirs(OUTDIR)
     ifile = open("videos.txt",'r')
     queue = [x.strip() for x in ifile]
+    dl_type = queue.pop(0) # the first line is a type indicator, video or audio
     queue_record = prep_queue_record(queue)
-    download_all(queue_record)
+    download_all(queue_record, dl_type)
     save_record(queue_record)
