@@ -1,10 +1,13 @@
-quickie video downloader, 
-assumes video list is in videos.txt, 
+Quick youtube video/audio downloader
+
+assumes list of links is in videos.txt
+the first line *MUST* have either *audio* or *video* in it to tell it what to download
 one youtube video link per line
 
 It is pretty braindead and grabs the 1st high quality stream (usually the best one) it's presented with.
+Audio download will download audio-only mp4 files which you can extract using VLC
 
-Files are saved
+Files are saved in output/
 
 ## Dependencies
 
