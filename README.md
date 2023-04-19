@@ -1,7 +1,7 @@
 Quick youtube video/audio downloader
 
 assumes list of links is in videos.txt
-the first line *MUST* have either *audio* or *video* in it to tell it what to download
+the first line **DMUST** have either **audio** or **video** in it to tell it what to download
 one youtube video link per line
 
 It is pretty braindead and grabs the 1st high quality stream (usually the best one) it's presented with.
@@ -11,7 +11,6 @@ Files are saved in output/
 
 ## Dependencies
 
-Uses the most recent version of pytube, you might have to git clone 
+Uses the most recent version of **pytube**, you might have to git clone 
 https://github.com/nficano/pytube
-and then link the pytube/ directory here if your version is not up to date
-(the version in pip seemed out of date (9.6.0))
+and then link the pytube/ directory here if your version is not up to date with whatever is in pip
