@@ -9,6 +9,9 @@ Audio download will download audio-only mp4 files which you can extract using VL
 
 Files are saved in output/
 
+It keeps a local pickle file (record.pickle) of past URLs it has successfully downloaded.
+This lets you re-run the script to overcome the occasional error.
+
 ## Dependencies
 
 Uses the most recent version of **pytube**, you might have to git clone 
